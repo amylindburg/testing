@@ -8,9 +8,10 @@ import (
 )
 
 func main() {
+	
 	file, err := os.Open("myfile.csv")
 	if err != nil {
-		fmt.Println("Ooops")
+		fmt.Println("Error opening file")
 	}
 	defer file.Close()
 
@@ -23,12 +24,11 @@ func main() {
 			fmt.Println(a)
 		}
 		if err != nil {
-			fmt.Println("error in scanned line")
+			fmt.Println("Error in regex")
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
-   		fmt.Println("Oh crap")
+   		fmt.Println("Error in scanner")
 	}
-
 }
