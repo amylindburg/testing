@@ -5,30 +5,31 @@ import (
 	"fmt"
 	"bufio"
 	"regexp"
+	"log"
 )
 
 func main() {
-	
+
 	file, err := os.Open("myfile.csv")
 	if err != nil {
-		fmt.Println("Error opening file")
+		log.Fatalf("error opening file: %v", err)
 	}
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
+	if err := scanner.Err(); err != nil {
+   		log.Fatalf("error in scanner: %v", err)
+	}
+
 	for scanner.Scan() {
 		//grab a text string
 		a := scanner.Text()
 		matched, err := regexp.MatchString("Docker", a)
+		if err != nil {
+			log.Fatalf("error in regex: %v", err)
+		}
 		if matched {
 			fmt.Println(a)
 		}
-		if err != nil {
-			fmt.Println("Error in regex")
-		}
-	}
-
-	if err := scanner.Err(); err != nil {
-   		fmt.Println("Error in scanner")
-	}
+	}	
 }
