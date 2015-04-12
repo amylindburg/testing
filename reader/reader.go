@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	file, err := os.Open("myfile.csv")
+	file, err := os.Open("/Users/amylindburg/go/src/github.com/amylindburg/testing/reader/myfile.csv")
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
 	}
